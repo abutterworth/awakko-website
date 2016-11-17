@@ -1,0 +1,26 @@
+{
+  "name": "awakko-website",
+  "version": "1.0.0",
+  "description": "Homepage for Awakko, a San Francisco based Awaodori group",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "python -m SimpleHTTPServer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abutterworth/awakko-website.git"
+  },
+  "author": "Adam Butterworth, Christine Wu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abutterworth/awakko-website/issues"
+  },
+  "homepage": "https://github.com/abutterworth/awakko-website#readme",
+  "dependencies": {
+    "flexboxgrid": "^6.3.1",
+    "jquery": "^3.1.1",
+    "less": "^2.7.1",
+    "normalize-css": "^2.3.1"
+  }
+}

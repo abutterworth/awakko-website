@@ -1,1 +1,147 @@
-<h1>We are San Francisco Awakko-ren</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>San Francisco Awakko</title>
+	<link href="https://fonts.googleapis.com/css?family=Rubik:400,600" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--<link rel="stylesheet" type="text/css" href="node_modules/flexboxgrid/dist/flexboxgrid.min.css">-->
+</head>
+<body id="top" data-spy="scroll" data-target="#page-nav">
+
+
+	<header id="page-header">
+		<div class="page-column">
+			<a class="home-logo-link"></a>
+			<nav id="page-nav" class="page-nav">
+				<a href="#top" data-string="Link About"></a>
+				<a href="#tradition" data-string="Link Awa"></a>
+				<a href="#join" data-string="Link Join"></a>
+				<a href="#performances" data-string="Link Performances"></a>
+				<a href="#contact" data-string="Link Contact"></a>
+			</nav>
+		</div>
+	</header>
+	<div class="page-column">
+		<div class="row">
+			<div class="col-xs-7">
+			</div>
+			<div class="col-xs-5">
+				<h1 data-string="Site Header"></h1>
+				<p data-string="Sub Header"></p>
+			</div>
+		</div>
+		
+	</div>
+	<div class="dark-band" id="tradition">
+	<div class="page-column">
+		<div class="row">
+			<div class="col-xs-6">
+				<h2 data-string="Tradition Header"></h2>
+				<div data-string="Tradition Description" data-type="p"></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6">
+			<!--[image]-->
+			</div>
+			<div class="col-xs-6">
+				<h3 data-string="The Dance"></h3>
+				<div data-string="The Dance Description" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-4">
+				<h3 data-string="The Instruments"></h3>
+				<div data-string="The Instruments Description"></div>
+			</div>
+			<div class="col-xs-8">
+
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+	<div id="join" class="page-column">
+		<div class="row">
+			<div class="col-xs-6">
+				<h2 data-string="Join Us"></h2>
+				<div data-string="Join Us Description"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-4">
+				<h3 data-string="Practice Sessions"></h3>
+				<div data-string="Practice Session List"></div>
+			</div>
+		</div>
+
+		<!--<h3 data-string="Members"></h3>-->
+	</div>
+
+
+
+
+
+
+
+
+	<div id="performances" class="dark-band">
+	<div class="page-column">
+		<h2 data-string="Performances"></h2>
+		<div data-string="Performances Description"></div>
+	</div>
+	</div>
+
+	<div id="contact" class="page-column">
+		<h2 data-string="Contact Us"></h2>
+		<div data-string="Contact Us Description"></div>
+		<h2 data-string="Sponsors"></h2>
+		<div data-string="Sponsors Description"></div>
+	</div>
+
+
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		var minimized = false;
+		$(window).on('scroll', function(e) {
+			if (minimized && window.scrollY == 0) {
+				// unminimized
+				$('#page-header').removeClass('minimized');
+				minimized = false;
+			} else if (!minimized && window.scrollY > 0) {
+				// minimize
+				$('#page-header').addClass('minimized');
+				minimized = true;
+			}
+		});
+
+		var strings = {};
+
+		$.ajax({
+			url: 'https://script.google.com/macros/s/AKfycbxBt3sQUX96H5io28TF8p_sBiaio9aPQs_e7FUCC-T1_he4M3sb/exec',
+			type: 'GET',
+			complete: function(xhr) {
+				console.log(xhr.responseJSON);
+				strings = xhr.responseJSON;
+
+				$('[data-string]').each(function() {
+					var stringValues= strings[$(this).data('string')];
+					if (stringValues.length > 1) {
+						var type = $(this).data('type') || 'p';
+						var elements = stringValues.map(function(value) {
+							return $('<' + type + '/>').html(value);
+						});
+						$(this).html(elements);
+					} else if (stringValues.length) {
+						$(this).html(stringValues[0]);
+					}
+				})
+			}
+		});
+		$('#page-nav').scrollspy()
+	</script>
+</body>
+</html>
